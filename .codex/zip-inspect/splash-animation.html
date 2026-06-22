@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Splash Screen Animation</title>
+  <style>
+    /* ─── RESET ─────────────────────────────────── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #1a1a2e; /* fallback page bg */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ─── SPLASH WRAPPER ─────────────────────────── */
+    .logo_wrapper {
+      height: 100vh;
+      width: 100vw;
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ─── GROWING / SHRINKING CIRCLE  ────────────── */
+    /* This is the purple circle that expands to fill the screen,
+       holds, then collapses back. Total duration = 5.5 s           */
+    .screen {
+      background-color: #55198b;   /* ← change to your brand colour */
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 100%;
+      animation: grow 5.5s forwards;
+    }
+
+    @keyframes grow {
+      0%   { transform: scale(0); border-radius: 100%; }
+      10%  { transform: scale(1); border-radius: 0%; height: 100%; width: 100%; }
+      90%  { transform: scale(1); border-radius: 0%; height: 100%; width: 100%; }
+      100% { transform: scale(0); transform-origin: 50% 50%; border-radius: 100%; }
+    }
+
+    /* ─── SVG LOGO CONTAINER ─────────────────────── */
+    #logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .raw_logo {
+      /* width/height set inline on the <svg> */
+    }
+
+    /* ─── DISAPPEAR AFTER ANIMATION ─────────────── */
+    .logo_wrapper.done {
+      pointer-events: none;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── SPLASH SCREEN ─────────────────────────────────────────────── -->
+  <div class="logo_wrapper" id="splashWrapper">
+    <div class="screen">
+
+      <!--
+        ╔══════════════════════════════════════════════════════════════╗
+        ║  SVG LOGO  —  replace the paths below with YOUR own logo.    ║
+        ║  The animation works via stroke-dasharray / stroke-dashoffset║
+        ║  Each element is drawn sequentially using CSS @keyframes.    ║
+        ╚══════════════════════════════════════════════════════════════╝
+
+        STROKE COLOUR: change all stroke="#fff" to your colour.
+        SIGNATURE COLOUR: change stroke in the <style> block inside <svg>.
+      -->
+
+      <svg
+        id="logo"
+        class="raw_logo"
+        width="50%"
+        height="40%"
+        viewBox="0 0 440 305"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+
+        <!-- ── OUTER HEXAGON ──────────────────────────────── -->
+        <!-- Drawn in 4 s starting at 0.5 s (class: myHexagon) -->
+        <path
+          class="myHexagon"
+          d="M293.545 167.405L229.5 204.381C227.025 205.81 223.975 205.81 221.5
+             204.381L157.455 167.405C154.98 165.976 153.455 163.335 153.455
+             160.476L153.455 86.5234C153.455 83.6653 154.98 81.0243 157.455
+             79.5952L221.5 42.6187C223.975 41.1896 227.025 41.1897 229.5
+             42.6187L293.545 79.5952C296.02 81.0243 297.545 83.6653 297.545
+             86.5234L297.545 160.476C297.545 163.335 296.02 165.976 293.545 167.405Z"
+          stroke="#fff"
+          stroke-width="4"
+        />
+
+        <!-- ── INNER HEXAGON ──────────────────────────────── -->
+        <path
+          class="myHexagon"
+          d="M147.455 73.5953L211.5 36.6188C213.975 35.1898 217.025 35.1898 219.5
+             36.6188L283.545 73.5953C286.02 75.0244 287.545 77.6654 287.545
+             80.5235L287.545 154.477C287.545 157.335 286.02 159.976 283.545
+             161.405L219.5 198.381C217.025 199.81 213.975 199.81 211.5
+             198.381L147.455 161.405C144.98 159.976 143.455 157.335 143.455
+             154.477L143.455 80.5235C143.455 77.6654 144.98 75.0244 147.455 73.5953Z"
+          stroke="#fff"
+          stroke-width="4"
+        />
+
+        <!-- ── LETTER "A" ─────────────────────────────────── -->
+        <!-- Rendered immediately (no dash animation), stroke only -->
+        <path
+          class="letter"
+          d="M217.945 123.968V132H194.566V123.968H200.65L198.395 115.799H186.056
+             L183.526 123.968H189.884V132H168.829V123.968H174.708L183.971
+             92.4883H177.647V84.4561H208.683V92.4883H202.291L212.271
+             123.968H217.945ZM196.446 108.826L192.481 94.5049L188.209 108.826H196.446Z"
+          stroke="#fff"
+          stroke-width="3"
+        />
+
+        <!-- ── LETTER "H" ─────────────────────────────────── -->
+        <path
+          class="letter"
+          d="M217.153 158V149.968H223.101V118.488H217.153V110.456H240.122
+             V118.488H235.132V128.913H248.086V118.488H243.267V110.456H266.099
+             V118.488H260.117V149.968H266.099V158H243.267V149.968H248.086
+             V136.979H235.132V149.968H240.122V158H217.153Z"
+          stroke="#fff"
+          stroke-width="3"
+        />
+
+        <!-- ── SIGNATURE PATHS ─────────────────────────────
+             (signature1 … signature15)
+             Each letter-group is drawn 1 s long with a 0.2 s
+             stagger between them, starting at 0.5 s.
+
+             TO USE YOUR OWN NAME:
+               1.  Create SVG path data for each letter of your
+                   name / logo text using a tool like Figma,
+                   Inkscape, or https://danmarshall.github.io/google-font-to-svg-path/
+               2.  Add each <path class="signatureN"> element.
+               3.  Extend the CSS block inside <defs> below with
+                   matching .signatureN rules (copy the pattern).
+        ─────────────────────────────────────────────────── -->
+
+        <!-- The signature SVG paths from the original source are very large
+             (they encode Ashutosh's handwritten name).
+             Replace the content below with your own signature/name SVG paths. -->
+
+        <!--
+          PLACEHOLDER — paste your own signature path(s) here.
+          Each path needs:
+            class="signatureN"
+            stroke="#fff"
+            stroke-width="6"
+            mask="url(#path-5-inside-1)"  (if you use the mask; otherwise omit)
+        -->
+
+        <!-- Mask (used by the signature paths to clip the stroke) -->
+        <mask id="path-5-inside-1" fill="#fff">
+          <!-- Paste your mask path data here, matching your signature paths -->
+        </mask>
+
+        <!-- ── ANIMATION DEFINITIONS ──────────────────────── -->
+        <defs>
+          <style>
+            /* Master keyframe — animates stroke-dashoffset to 0
+               so the path appears to "draw" itself                */
+            @keyframes dash {
+              to { stroke-dashoffset: 0; }
+            }
+
+            /* ── Hexagon (both) ── */
+            .myHexagon {
+              stroke-dasharray: 800;
+              stroke-dashoffset: 800;
+              animation: dash 4s linear forwards 0.5s;
+            }
+
+            /* ── Letter paths — visible immediately (no draw anim) ── */
+            .letter { opacity: 0; }
+
+            /* ── Signature segments — staggered draw, 0.2 s gap ──
+               Delays: 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.7, 1.9, 2.1,
+                       2.3, 2.5, 2.7, 2.9, 3.1, 3.3 s               */
+            .signature1, .signature2, .signature3,
+            .signature4, .signature5, .signature6, .signature7,
+            .signature8, .signature9, .signature10, .signature11,
+            .signature12, .signature13, .signature14, .signature15 {
+              stroke-dasharray: 800;
+              stroke-dashoffset: 800;
+            }
+            .signature1  { animation: dash 1s linear forwards 0.5s; }
+            .signature2  { animation: dash 1s linear forwards 0.7s; }
+            .signature3  { animation: dash 1s linear forwards 0.9s; }
+            .signature4  { animation: dash 1s linear forwards 1.1s; }
+            .signature5  { animation: dash 1s linear forwards 1.3s; }
+            .signature6  { animation: dash 1s linear forwards 1.5s; }
+            .signature7  { animation: dash 1s linear forwards 1.7s; }
+            .signature8  { animation: dash 1s linear forwards 1.9s; }
+            .signature9  { animation: dash 1s linear forwards 2.1s; }
+            .signature10 { animation: dash 1s linear forwards 2.3s; }
+            .signature11 { animation: dash 1s linear forwards 2.5s; }
+            .signature12 { animation: dash 1s linear forwards 2.7s; }
+            .signature13 { animation: dash 1s linear forwards 2.9s; }
+            .signature14 { animation: dash 1s linear forwards 3.1s; }
+            .signature15 { animation: dash 1s linear forwards 3.3s; }
+          </style>
+        </defs>
+      </svg>
+
+    </div><!-- /.screen -->
+  </div><!-- /.logo_wrapper -->
+
+
+  <!-- ── YOUR ACTUAL PAGE CONTENT (hidden until splash finishes) ── -->
+  <div id="pageContent" style="display:none; color:#fff; font-family:sans-serif; text-align:center;">
+    <h1>Welcome to My Website!</h1>
+    <p>Replace this with your homepage content.</p>
+  </div>
+
+
+  <!-- ── LOGIC: hide splash & show page after 5.5 s ────────────── -->
+  <script>
+    const SPLASH_DURATION = 5500; // ms — must match the CSS animation (5.5 s)
+
+    setTimeout(() => {
+      const splash  = document.getElementById('splashWrapper');
+      const content = document.getElementById('pageContent');
+
+      // Option A: simply hide the overlay
+      splash.style.display = 'none';
+      content.style.display = 'block';
+
+      // Option B (for React / SPA): replace the line above with
+      //   navigate('/home');
+      // or set a React state: setSplashDone(true)
+
+    }, SPLASH_DURATION);
+  </script>
+
+</body>
+</html>
