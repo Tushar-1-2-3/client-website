@@ -1,0 +1,388 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Syne:wght@700;800&display=swap');
+@import "tailwindcss";
+
+/* Amiamie Regular */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-Regular.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Amiamie Regular Italic */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-Italic.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Amiamie Light */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-Light.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Amiamie Light Italic */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-LightItalic.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Amiamie Black */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-Black.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Amiamie Black Italic */
+@font-face {
+  font-family: "Amiamie";
+  src: url("/fonts/amiamie/otf/Amiamie-BlackItalic.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Amiamie-Round Variants (if needed separately) */
+@font-face {
+  font-family: "Amiamie-Round";
+  src: url("/fonts/amiamie/otf/Amiamie-RegularRound.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-RegularRound.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie-Round";
+  src: url("/fonts/amiamie/otf/Amiamie-BlackRound.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-BlackRound.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amiamie-Round";
+  src: url("/fonts/amiamie/otf/Amiamie-BlackItalicRound.otf") format("opentype"),
+    url("/fonts/amiamie/ttf/Amiamie-BlackItalicRound.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+@theme {
+  --color-primary: #e5e5e0;
+  --color-DarkLava: #393632;
+  --color-SageGray: #8b8b73;
+  --color-gold: #cfa355;
+  --font-amiamie: "Syne", sans-serif;
+  --font-amiamie-round: "Plus Jakarta Sans", sans-serif;
+
+
+  --animate-marquee: marquee 40s infinite linear;
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+}
+
+body {
+  background: #dcd9cee8;
+  color: black;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-family: var(--font-amiamie-round);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.marquee-track,
+.marquee-track-reverse {
+  animation: marquee-track 32s linear infinite;
+}
+
+.marquee-track-reverse {
+  animation-direction: reverse;
+}
+
+@keyframes marquee-track {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility clip-path {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+}
+
+@utility banner-text-responsive {
+  @apply text-[44px] sm:text-[84px] md:text-[112px] lg:text-[152px] leading-[0.9] sm:leading-[0.85] lg:leading-20;
+}
+
+@utility value-text-responsive {
+  @apply text-lg sm:text-xl md:text-[26px] lg:text-[32px];
+}
+
+@utility marquee-text-responsive {
+  @apply text-[22px] sm:text-[30px] lg:text-[42px];
+}
+
+@utility contact-text-responsive {
+  @apply text-[7.5vw] sm:text-[48px] md:text-[62px] lg:text-[100px] leading-[1.18] sm:leading-tight;
+}
+
+.section-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.section-shell::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.glass-panel {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03)
+  );
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 20px 80px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.cta-button {
+  transition:
+    transform 300ms ease,
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease;
+  will-change: transform;
+}
+
+.cta-button:hover {
+  background: white;
+  color: black;
+  border-color: white;
+}
+
+.contact-input {
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  background: transparent;
+  padding: 0.9rem 0;
+  color: white;
+  outline: none;
+  transition:
+    border-color 240ms ease,
+    opacity 240ms ease;
+}
+
+.contact-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.contact-input:focus {
+  border-color: rgba(207, 163, 85, 0.9);
+}
+
+/* Scroll-driven translations using CSS variables from IntersectionObserver */
+section {
+  --translate-value: -40;
+  --translate-value-header: 0;
+}
+
+/* Apply smooth translation scroll transitions on section elements */
+section .scroll-header, 
+section h2, 
+section h3 {
+  transform: translateY(calc(var(--translate-value-header) * 0.35px)) translateZ(0);
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+section .scroll-content, 
+section p, 
+section .grid {
+  transform: translateY(calc(var(--translate-value) * 0.75px)) translateZ(0);
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+section .contact-summary-copy {
+  transform: none;
+}
+
+section .service-summary-hint {
+  transform: none;
+}
+
+section.services-section h2,
+section.services-section h3,
+section.services-section p {
+  transform: none;
+}
+
+.services-section .services-reveal {
+  opacity: 0;
+  transform: translate3d(0, 100px, 0);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.services-section .services-reveal.services-reveal-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.contact-summary-strip {
+  margin: 0 auto;
+  width: fit-content;
+  max-width: 100%;
+  text-transform: uppercase;
+}
+
+.contact-summary-row {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  overflow: hidden;
+  line-height: 0.94;
+  white-space: nowrap;
+}
+
+.contact-summary-char {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  transform: translate(20%, 100%);
+  text-shadow: 3px 4px 0 rgba(0, 0, 0, 0.1);
+  transition: transform 0.6s cubic-bezier(0.65, 0.02, 0.23, 1);
+}
+
+.contact-summary-char::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-40%);
+  transition: transform 0.6s cubic-bezier(0.65, 0.02, 0.23, 1);
+}
+
+.contact-summary-strip.is-visible .contact-summary-char {
+  transform: translate(0, 0);
+}
+
+.contact-summary-strip.is-visible .contact-summary-char::before {
+  transform: translateY(100%);
+}
+
+@media (max-width: 640px) {
+  .contact-summary-strip {
+    padding-inline: 0.1em;
+    font-size: clamp(1.9rem, 8.8vw, 3.3rem);
+  }
+
+  .contact-summary-row {
+    line-height: 1;
+  }
+}
+
+section.works-section .work-video-grid {
+  transform: none;
+}
+
+.work-video-control {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.about-photo-reveal {
+  display: block;
+}
+
+.about-photo-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.03);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.about-photo-mask {
+  overflow: hidden;
+}
+
+.about-photo-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.about-photo-block {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(135deg, #000000, #ff301d);
+  pointer-events: none;
+}
+
+/* Reveal transition styles for elements with toggle-class */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll:not(.toggle-class) {
+  opacity: 1;
+  transform: translateY(0);
+}
