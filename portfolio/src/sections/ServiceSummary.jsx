@@ -9,9 +9,12 @@ gsap.registerPlugin(ScrollTrigger);
 const ServiceSummary = () => {
   const containerRef = useRef(null);
   const comparisonRef = useRef(null);
+  const comparisonFrameRef = useRef(null);
+  const sliderAreaRef = useRef(null);
   const sliderClipRef = useRef(null);
   const sliderHandleRef = useRef(null);
-  const isHoveredRef = useRef(false);
+  const isDraggingRef = useRef(false);
+  const activePointerIdRef = useRef(null);
 
   const updateSlider = (percentage) => {
     const clampedPercentage = Math.max(0, Math.min(100, percentage));
@@ -54,31 +57,63 @@ const ServiceSummary = () => {
       }
     );
 
-    // Wipe slider animation driven by scroll (runs from 100% LOG to 0% LOG)
+    // Keep the comparison slider tied to scroll unless the user is actively dragging it.
     ScrollTrigger.create({
-      trigger: comparisonRef.current,
-      start: "top bottom",
-      end: "bottom center-=150",
+      trigger: comparisonFrameRef.current,
+      start: "top 72%",
+      end: "bottom center",
       scrub: 0.5,
       onUpdate: (self) => {
-        if (!isHoveredRef.current) {
+        if (!isDraggingRef.current) {
           updateSlider((1 - self.progress) * 100);
         }
-      }
+      },
     });
+
   }, { scope: containerRef });
 
-  // Handle mouse move for manual slider dragging
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-    updateSlider(percentage);
-    isHoveredRef.current = true;
+  const getPointerPercentage = (clientX) => {
+    const rect = sliderAreaRef.current?.getBoundingClientRect();
+
+    if (!rect || rect.width === 0) {
+      return 50;
+    }
+
+    const x = clientX - rect.left;
+    return (x / rect.width) * 100;
   };
 
-  const handleMouseLeave = () => {
-    isHoveredRef.current = false;
+  const handlePointerDown = (e) => {
+    activePointerIdRef.current = e.pointerId;
+    isDraggingRef.current = true;
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+    updateSlider(getPointerPercentage(e.clientX));
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDraggingRef.current || activePointerIdRef.current !== e.pointerId) {
+      return;
+    }
+
+    updateSlider(getPointerPercentage(e.clientX));
+  };
+
+  const handlePointerUp = (e) => {
+    if (activePointerIdRef.current !== e.pointerId) {
+      return;
+    }
+
+    if (e.currentTarget.hasPointerCapture?.(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+
+    activePointerIdRef.current = null;
+    isDraggingRef.current = false;
+  };
+
+  const handlePointerCancel = () => {
+    activePointerIdRef.current = null;
+    isDraggingRef.current = false;
   };
 
   return (
@@ -106,7 +141,10 @@ const ServiceSummary = () => {
         ref={comparisonRef}
         className="relative z-10 mb-16 w-full max-w-[920px] px-6 md:px-12 sm:mb-20"
       >
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#111] shadow-[0_40px_120px_rgba(0,0,0,0.85)]">
+        <div
+          ref={comparisonFrameRef}
+          className="overflow-hidden rounded-2xl border border-white/10 bg-[#111] shadow-[0_40px_120px_rgba(0,0,0,0.85)]"
+        >
           {/* NLE-style top bar */}
           <div className="flex items-center justify-start border-b border-white/8 bg-[#161616] px-4 py-2.5">
             <div className="flex items-center gap-2">
@@ -120,9 +158,14 @@ const ServiceSummary = () => {
           </div>
 
           <div
+            ref={sliderAreaRef}
             className="group relative aspect-video w-full cursor-ew-resize select-none"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerCancel}
+            onLostPointerCapture={handlePointerCancel}
+            style={{ touchAction: "none" }}
           >
             {/* Base Layer: Color Graded footage */}
             <div className="absolute inset-0">

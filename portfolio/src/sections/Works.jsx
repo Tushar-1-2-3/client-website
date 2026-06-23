@@ -122,6 +122,12 @@ const workCategories = [
         video:
           "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874539/storrytelling_edit_cr3tsd.mp4",
       },
+      {
+        id: "formal-05",
+        title: "Preview Video",
+        video:
+          "https://res.cloudinary.com/dmjosipae/video/upload/v1782136358/preview_video_r3nbup.mp4",
+      },
     ],
   },
 ];
@@ -191,14 +197,14 @@ const VideoCard = memo(({ card, accent, isPortrait }) => {
     video.addEventListener("pause", handlePause);
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting || entry.intersectionRatio < 0.15) {
-            video.pause();
-          }
-        });
+      ([entry]) => {
+        // Pause only after the card is almost fully off-screen to avoid
+        // accidental pauses from small scroll movements on mobile.
+        if (!entry?.isIntersecting || entry.intersectionRatio <= 0.02) {
+          video.pause();
+        }
       },
-      { threshold: [0, 0.15, 0.5] }
+      { threshold: [0, 0.02, 0.1] }
     );
 
     const preloadObserver = new IntersectionObserver(
@@ -211,7 +217,7 @@ const VideoCard = memo(({ card, accent, isPortrait }) => {
       { rootMargin: "200px 0px", threshold: 0.01 }
     );
 
-    observer.observe(video);
+    observer.observe(cardNode);
     preloadObserver.observe(cardNode);
 
     return () => {
@@ -233,7 +239,7 @@ const VideoCard = memo(({ card, accent, isPortrait }) => {
         hidden: { opacity: 0, y: 40 },
         show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
       }}
-      className={`work-video-card group relative ${isPortrait ? "aspect-[9/16]" : "aspect-video"} overflow-hidden rounded-[1.5rem] border border-white/8 bg-black shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)] hover:-translate-y-1.5 cursor-pointer`}
+      className={`work-video-card group relative ${isPortrait ? "aspect-[9/15] sm:aspect-[9/16]" : "aspect-video"} overflow-hidden rounded-[1.5rem] border border-white/8 bg-black shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-500 hover:shadow-[0_24px_60px_rgba(0,0,0,0.3)] hover:-translate-y-1.5 cursor-pointer`}
       onClick={handleTogglePlay}
     >
       <video
@@ -315,7 +321,7 @@ const VideoGrid = memo(({ category }) => {
       }}
       className={
         isPortrait
-          ? "work-video-grid grid grid-cols-2 gap-3 sm:gap-6 w-full"
+          ? "work-video-grid grid grid-cols-2 gap-2 sm:gap-6 w-full"
           : "work-video-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 lg:gap-12 w-full"
       }
     >
@@ -356,16 +362,6 @@ const WorkCategory = memo(({ category }) => (
             {category.description}
           </p>
 
-          <div className="flex flex-wrap gap-2 pt-2">
-            {category.cards.map((card) => (
-              <span
-                key={card.id}
-                className="rounded-full border border-white/8 bg-white/5 px-3.5 py-1 font-mono text-[8px] uppercase tracking-[0.2rem] text-white/40"
-              >
-                {card.title}
-              </span>
-            ))}
-          </div>
         </div>
 
         {/* Right Column (Video grid/stack) */}

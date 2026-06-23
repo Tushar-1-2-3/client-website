@@ -230,14 +230,16 @@ const LogoNode = ({ sw, compact = false }) => {
           background: `radial-gradient(circle at 50% 0%, ${sw.accent}, transparent 65%)`,
         }}
       />
-      <img
-        src={sw.logoPath}
-        alt={`${sw.name} logo`}
-        loading="lazy"
-        decoding="async"
-        className={`${imgClass} relative object-contain select-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]`}
-        draggable="false"
-      />
+      <div className="software-logo-reveal relative overflow-hidden">
+        <img
+          src={sw.logoPath}
+          alt={`${sw.name} logo`}
+          loading="lazy"
+          decoding="async"
+          className={`${imgClass} software-logo-art relative object-contain select-none drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]`}
+          draggable="false"
+        />
+      </div>
     </div>
   );
 };
@@ -434,14 +436,44 @@ const Services = () => {
         const marker = markerRefs.current[index];
         const card = cardRefs.current[index];
         const trigger = isMobile ? card : marker;
+        const logoReveal = marker?.querySelector(".software-logo-reveal");
+        const logoImage = marker?.querySelector(".software-logo-art");
 
         if (!trigger) {
           return;
         }
 
         if (marker) {
+          gsap.set(marker, { transformOrigin: "50% 50%" });
+
+          if (logoReveal) {
+            gsap.set(logoReveal, {
+              clipPath: "inset(100% 0% 0% 0%)",
+              autoAlpha: 0,
+            });
+          }
+
+          if (logoImage) {
+            gsap.set(logoImage, {
+              yPercent: 18,
+              scale: 1.16,
+              rotate: -4,
+              filter: "blur(8px)",
+            });
+          }
+
           if (isMobile) {
-            gsap.fromTo(
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger,
+                start: "top 88%",
+                toggleActions: "play none none none",
+                once: true,
+                invalidateOnRefresh: true,
+              },
+            });
+
+            tl.fromTo(
               marker,
               {
                 autoAlpha: 0,
@@ -456,17 +488,46 @@ const Services = () => {
                 duration: 0.85,
                 ease: "power2.out",
                 immediateRender: true,
-                scrollTrigger: {
-                  trigger,
-                  start: "top 88%",
-                  toggleActions: "play none none none",
-                  once: true,
-                  invalidateOnRefresh: true,
-                },
               }
             );
+
+            if (logoReveal) {
+              tl.to(
+                logoReveal,
+                {
+                  autoAlpha: 1,
+                  clipPath: "inset(0% 0% 0% 0%)",
+                  duration: 0.65,
+                  ease: "power3.out",
+                },
+                0.08
+              );
+            }
+
+            if (logoImage) {
+              tl.to(
+                logoImage,
+                {
+                  yPercent: 0,
+                  scale: 1,
+                  rotate: 0,
+                  filter: "blur(0px)",
+                  duration: 0.9,
+                  ease: "power3.out",
+                },
+                0.08
+              );
+            }
           } else {
-            gsap.fromTo(
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger,
+                start: "center 76%",
+                toggleActions: "play none none reverse",
+              },
+            });
+
+            tl.fromTo(
               marker,
               {
                 autoAlpha: 0,
@@ -481,13 +542,36 @@ const Services = () => {
                 rotate: 0,
                 duration: 0.8,
                 ease: "power3.out",
-                scrollTrigger: {
-                  trigger,
-                  start: "center 76%",
-                  toggleActions: "play none none reverse",
-                },
               }
             );
+
+            if (logoReveal) {
+              tl.to(
+                logoReveal,
+                {
+                  autoAlpha: 1,
+                  clipPath: "inset(0% 0% 0% 0%)",
+                  duration: 0.6,
+                  ease: "power3.out",
+                },
+                0.1
+              );
+            }
+
+            if (logoImage) {
+              tl.to(
+                logoImage,
+                {
+                  yPercent: 0,
+                  scale: 1,
+                  rotate: 0,
+                  filter: "blur(0px)",
+                  duration: 0.85,
+                  ease: "power3.out",
+                },
+                0.1
+              );
+            }
           }
         }
 
