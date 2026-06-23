@@ -234,15 +234,15 @@ section {
 }
 
 /* Apply smooth translation scroll transitions on section elements */
-section .scroll-header, 
-section h2, 
+section .scroll-header,
+section h2,
 section h3 {
   transform: translateY(calc(var(--translate-value-header) * 0.35px)) translateZ(0);
   transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-section .scroll-content, 
-section p, 
+section .scroll-content,
+section p,
 section .grid {
   transform: translateY(calc(var(--translate-value) * 0.75px)) translateZ(0);
   transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
