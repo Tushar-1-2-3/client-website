@@ -1,15 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import Marquee from "../components/Marquee";
 
 const ContactSummary = () => {
-  const items = ["Story", "Pacing", "Color", "Motion", "Sound"];
-  const items2 = [
-    "contact me",
-    "contact me",
-    "contact me",
-    "contact me",
-    "contact me",
-  ];
   const textRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -98,8 +89,7 @@ const ContactSummary = () => {
   }, []);
 
   return (
-    <section className="contact-summary-section flex min-h-[100svh] flex-col items-center justify-between gap-8 overflow-visible py-6 mt-16 sm:min-h-screen sm:gap-12 sm:py-0">
-      <Marquee items={items} />
+    <section className="contact-summary-section flex min-h-[50svh] sm:min-h-[60svh] flex-col items-center justify-center overflow-visible py-12 mt-10 sm:py-20 sm:mt-16">
       <div className="w-full overflow-visible px-4 py-3 font-light text-center contact-text-responsive sm:px-6">
         <p
           ref={textRef}
@@ -122,13 +112,6 @@ const ContactSummary = () => {
           ))}
         </p>
       </div>
-      <Marquee
-        items={items2}
-        reverse={true}
-        className="text-black bg-transparent border-y-2"
-        iconClassName="stroke-gold stroke-2 text-primary"
-        icon="material-symbols-light:square"
-      />
     </section>
   );
 };

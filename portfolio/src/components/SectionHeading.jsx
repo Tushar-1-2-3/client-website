@@ -98,23 +98,25 @@ const SectionHeading = ({
         </h2>
       </div>
 
-      <div
-        className={`max-w-2xl text-sm font-light uppercase tracking-[0.22rem] sm:text-base ${
-          isLight ? "text-black/65" : "text-white/65"
-        }`}
-      >
-        {descriptionLines.map((line, index) => (
-          <span
-            key={`${line}-${index}`}
-            ref={(el) => {
-              lineRefs.current[index] = el;
-            }}
-            className="block will-change-transform"
-          >
-            {line}
-          </span>
-        ))}
-      </div>
+      {descriptionLines.length > 0 ? (
+        <div
+          className={`max-w-2xl text-sm font-light uppercase tracking-[0.22rem] sm:text-base ${
+            isLight ? "text-black/65" : "text-white/65"
+          }`}
+        >
+          {descriptionLines.map((line, index) => (
+            <span
+              key={`${line}-${index}`}
+              ref={(el) => {
+                lineRefs.current[index] = el;
+              }}
+              className="block will-change-transform"
+            >
+              {line}
+            </span>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };

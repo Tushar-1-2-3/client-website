@@ -128,7 +128,7 @@ const Navbar = () => {
         className="fixed top-0 right-0 z-50 flex flex-col justify-between w-[82vw] max-w-[360px] h-full px-6 uppercase bg-black text-white/80 py-20 gap-y-10 sm:w-[380px] sm:px-8 sm:py-24 md:left-auto md:right-0 md:w-[400px] lg:w-[440px] xl:w-[500px]"
       >
         <div className="flex flex-col text-3xl gap-y-3 sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
-          {["home", "about", "services", "work", "contact"].map(
+          {["home", "about", "work", "services", "contact"].map(
             (section, index) => (
               <div key={index} ref={(el) => (linksRef.current[index] = el)}>
                 <Link

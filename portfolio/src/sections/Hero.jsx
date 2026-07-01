@@ -9,8 +9,7 @@ const Hero = () => {
   const heroRef = useRef(null);
   const isMobile = useMediaQuery({ maxWidth: 853 });
   const [isHeroVisible, setIsHeroVisible] = useState(true);
-  const text = `I turn raw footage into cinematic stories and
-motion that keeps viewers watching`;
+  const text = "";
 
   useEffect(() => {
     const heroNode = heroRef.current;

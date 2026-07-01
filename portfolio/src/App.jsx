@@ -60,9 +60,9 @@ const App = () => {
               <Hero />
               <Suspense fallback={null}>
                 <About />
+                <Works />
                 <ServiceSummary />
                 <Services />
-                <Works />
                 <ContactSummary />
                 <Contact />
               </Suspense>

@@ -15,6 +15,7 @@ const AnimatedHeaderSection = ({
   const headerRef = useRef(null);
   const shouldSplitTitle = title.includes(" ");
   const titleParts = shouldSplitTitle ? title.split(" ") : [title];
+  const hasText = text.trim().length > 0;
   useGSAP(() => {
     const tl = gsap.timeline({
       scrollTrigger: withScrollTrigger
@@ -44,7 +45,7 @@ const AnimatedHeaderSection = ({
       <div style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}>
         <div
           ref={headerRef}
-          className="flex flex-col justify-center gap-12 pt-16 sm:gap-16"
+          className="flex flex-col justify-center gap-12 pt-16 pb-6 sm:gap-16 sm:pb-8"
         >
           {subTitle ? (
             <p
@@ -69,14 +70,16 @@ const AnimatedHeaderSection = ({
         </div>
       </div>
       <div className={`relative px-10 ${textColor}`}>
-        <div className="absolute inset-x-0 border-t-2" />
+        <div className="absolute inset-x-0 border-t-2 border-transparent" />
         <div className="py-12 sm:py-16 text-end">
-          <AnimatedTextLines
-            text={text}
-            className={`${
-              isHome ? "font-bold" : "font-light"
-            } uppercase value-text-responsive ${textColor}`}
-          />
+          {hasText ? (
+            <AnimatedTextLines
+              text={text}
+              className={`${
+                isHome ? "font-bold" : "font-light"
+              } uppercase value-text-responsive ${textColor}`}
+            />
+          ) : null}
         </div>
       </div>
     </div>

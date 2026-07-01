@@ -7,9 +7,7 @@ import gsap from "gsap";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 const Contact = () => {
-  const text = `Have footage, a brief, or a content idea?
-    I would love to help shape it into a
-    polished video people remember`;
+  const text = ``;
   const items = [
     "send the footage",
     "shape the story",

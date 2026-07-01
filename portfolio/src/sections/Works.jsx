@@ -5,8 +5,52 @@ import SectionHeading from "../components/SectionHeading";
 
 const workCategories = [
   {
-    id: "saas-animation",
+    id: "formal-edits",
     label: "01",
+    title: "Formal Edits",
+    kicker: "Clean delivery",
+    description: (
+      <>
+        Polished <strong className="font-bold text-gold">corporate films</strong>, video testimonials, and high-impact <strong className="font-bold text-gold">brand storytelling</strong> edits.
+      </>
+    ),
+    accent: "#9f8dff",
+    cards: [
+      {
+        id: "formal-01",
+        title: "Personal Edit",
+        video:
+          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874739/black_kiya_reel_tnbruo.mp4",
+      },
+      {
+        id: "formal-03",
+        title: "Kinetic Cut",
+        video:
+          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874600/anime_edit_srpe4p.mp4",
+      },
+      {
+        id: "formal-02",
+        title: "Portrait Edit",
+        video:
+          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874565/personal_video_uvfct4.mp4",
+      },
+      {
+        id: "formal-04",
+        title: "Narrative Pacing",
+        video:
+          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874539/storrytelling_edit_cr3tsd.mp4",
+      },
+      {
+        id: "formal-05",
+        title: "Trending Video",
+        video:
+          "https://res.cloudinary.com/dmjosipae/video/upload/v1782136358/preview_video_r3nbup.mp4",
+      },
+    ],
+  },
+  {
+    id: "saas-animation",
+    label: "02",
     title: "SaaS Animation",
     kicker: "Product motion",
     description: (
@@ -16,6 +60,24 @@ const workCategories = [
     ),
     accent: "#6fcf97",
     cards: [
+      {
+        id: "saas-03",
+        title: "Spotify Motion",
+        video:
+          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874616/spotify_animation_molxra.mp4",
+      },
+      {
+        id: "saas-05",
+        title: "Platform Explainer",
+        video:
+          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874679/SAAS_ANIMATION_4_mqvmxm.mp4",
+      },
+      {
+        id: "saas-04",
+        title: "Line Art Concept",
+        video:
+          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874546/line_animation_oigjih.mp4",
+      },
       {
         id: "saas-01",
         title: "Dashboard Interaction",
@@ -28,29 +90,11 @@ const workCategories = [
         video:
           "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874679/2_najimu.mp4",
       },
-      {
-        id: "saas-03",
-        title: "Spotify Motion",
-        video:
-          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874616/spotify_animation_molxra.mp4",
-      },
-      {
-        id: "saas-04",
-        title: "Line Art Concept",
-        video:
-          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874546/line_animation_oigjih.mp4",
-      },
-      {
-        id: "saas-05",
-        title: "Platform Explainer",
-        video:
-          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874679/SAAS_ANIMATION_4_mqvmxm.mp4",
-      },
     ],
   },
   {
     id: "real-estate-animation",
-    label: "02",
+    label: "03",
     title: "Real Estate Animation",
     kicker: "Property visuals",
     description: (
@@ -83,50 +127,6 @@ const workCategories = [
         title: "Location Map Tracking",
         video:
           "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874727/tracking_animation_4_i5s8bl.mp4",
-      },
-    ],
-  },
-  {
-    id: "formal-edits",
-    label: "03",
-    title: "Formal Edits",
-    kicker: "Clean delivery",
-    description: (
-      <>
-        Polished <strong className="font-bold text-gold">corporate films</strong>, video testimonials, and high-impact <strong className="font-bold text-gold">brand storytelling</strong> edits.
-      </>
-    ),
-    accent: "#9f8dff",
-    cards: [
-      {
-        id: "formal-01",
-        title: "Personal Edit",
-        video:
-          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874739/black_kiya_reel_tnbruo.mp4",
-      },
-      {
-        id: "formal-02",
-        title: "Portrait Edit",
-        video:
-          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874565/personal_video_uvfct4.mp4",
-      },
-      {
-        id: "formal-03",
-        title: "Kinetic Cut",
-        video:
-          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874600/anime_edit_srpe4p.mp4",
-      },
-      {
-        id: "formal-04",
-        title: "Narrative Pacing",
-        video:
-          "https://res.cloudinary.com/dmjosipae/video/upload/q_auto/f_auto/v1781874539/storrytelling_edit_cr3tsd.mp4",
-      },
-      {
-        id: "formal-05",
-        title: "Preview Video",
-        video:
-          "https://res.cloudinary.com/dmjosipae/video/upload/v1782136358/preview_video_r3nbup.mp4",
       },
     ],
   },

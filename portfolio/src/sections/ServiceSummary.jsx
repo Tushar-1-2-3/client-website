@@ -130,7 +130,6 @@ const ServiceSummary = () => {
         <SectionHeading
           eyebrow="Color grade comparison"
           title="Before and after the grade"
-          description={`Drag or scroll to compare raw log footage against the final cinematic look.`}
           theme="dark"
           align="center"
         />

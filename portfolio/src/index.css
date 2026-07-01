@@ -143,7 +143,7 @@ body {
 }
 
 @utility banner-text-responsive {
-  @apply text-[44px] sm:text-[84px] md:text-[112px] lg:text-[152px] leading-[0.9] sm:leading-[0.85] lg:leading-20;
+  @apply text-[44px] sm:text-[84px] md:text-[112px] lg:text-[152px] leading-[1.1] sm:leading-[1.1] lg:leading-[1.1];
 }
 
 @utility value-text-responsive {
@@ -155,7 +155,7 @@ body {
 }
 
 @utility contact-text-responsive {
-  @apply text-[7.5vw] sm:text-[48px] md:text-[62px] lg:text-[100px] leading-[1.18] sm:leading-tight;
+  @apply text-[7.5vw] sm:text-[43px] md:text-[57px] lg:text-[95px] leading-[1.18] sm:leading-tight;
 }
 
 .section-shell {

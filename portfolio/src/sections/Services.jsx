@@ -37,7 +37,7 @@ const softwareList = [
   {
     id: "03",
     name: "DaVinci Resolve",
-    brand: "Blackmagic Design",
+    brand: "",
     accent: "#ffc107",
     tileBg: "#111111",
     desc: "Cinematic color grading, Rec.709 conversions, curves, and HSL masks",
@@ -51,7 +51,7 @@ const softwareList = [
   {
     id: "04",
     name: "CapCut",
-    brand: "ByteDance",
+    brand: "",
     accent: "#ffffff",
     tileBg: "#050505",
     desc: "Retention-first vertical social reels, aggressive cuts, and kinetic captions",
@@ -65,7 +65,7 @@ const softwareList = [
   {
     id: "05",
     name: "Filmora",
-    brand: "Wondershare",
+    brand: "",
     accent: "#00fcbf",
     tileBg: "#031b18",
     desc: "Rapid turnaround layout templates, overlay presets, and fast exports",
